@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="btcore.co.kr.h_fit">
+
+    <!-- 전화가 오는 상황을 감지하기 위한 권한 추가 -->
+    <!-- 전화걸려올경우 상대방 정보 확인 -->
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_MMS"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"></uses-permission>
+
+    <permission android:protectionLevel="signature"
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/logo_hfit"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"
+        android:roundIcon="@mipmap/logo_hfit"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".view.main.MainActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".view.step.StepActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.heart.HeartActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.cal.KcalActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.setting.SettingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.profile.ProfileActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.device.DeviceSettingActivity" android:screenOrientation="portrait" />
+        <activity android:name=".view.device.DeviceListActivity" android:label="@string/app_name" android:theme="@android:style/Theme.Dialog" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.dfu.DfuActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.dfu.NotificationActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.dfu.settings.SettingsActivity" android:screenOrientation="portrait"></activity>
+
+        <service android:enabled="true" android:name=".sevice.BluetoothLeService" />
+
+        <service
+            android:name="btcore.co.kr.h_fit.NotificationService"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" >
+                </action>
+            </intent-filter>
+        </service>
+
+
+        <service
+            android:name="btcore.co.kr.h_fit.view.dfu.DfuService"
+            android:exported="true"
+            android:label="@string/dfu_service_title" >
+            <intent-filter>
+                <action android:name="btcore.co.kr.h_fit.android.action.DFU_UPLOAD" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+
+        <receiver android:name=".receiver.CallReceiver"
+            android:permission="android.permission.BIND_SCREENING_SERVICE">
+            <intent-filter android:priority="9999">
+                <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receiver.SmsReceiver">
+            <intent-filter android:priority="9998">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receiver.MmsReceiver">
+            <intent-filter android:priority="9997">
+                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED" />
+                <data android:mimeType="application/vnd.wap.mms-message" />
+            </intent-filter>
+        </receiver>
+
+
+    </application>
+
+
+</manifest>

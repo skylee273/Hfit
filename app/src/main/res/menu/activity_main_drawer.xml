@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/icon_menu_v4"
+            android:title="홈" />
+        <item
+            android:id="@+id/nav_private"
+            android:icon="@drawable/icon_menu_v1"
+            android:title="개인정보 설정" />
+        <item
+            android:id="@+id/nav_device"
+            android:icon="@drawable/icon_menu_v2"
+            android:title="기기설정" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/icon_menu_v3"
+            android:title="설정" />
+        <item
+            android:id="@+id/nav_permission"
+            android:icon="@drawable/icon_alram"
+            android:title="알림 접근 허용" />
+    </group>
+
+
+</menu>
